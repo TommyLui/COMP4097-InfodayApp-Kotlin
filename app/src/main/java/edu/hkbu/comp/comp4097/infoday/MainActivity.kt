@@ -28,8 +28,6 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        var testingGit = 0
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
