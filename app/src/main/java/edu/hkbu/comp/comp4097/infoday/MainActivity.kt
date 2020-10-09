@@ -1,0 +1,57 @@
+package edu.hkbu.comp.comp4097.infoday
+
+import android.os.Bundle
+import android.view.MenuItem
+import android.view.View
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import edu.hkbu.comp.comp4097.infoday.ui.events.EventFragment
+import edu.hkbu.comp.comp4097.infoday.ui.news.NewsRecyclerViewAdapter
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+
+        val navController = findNavController(R.id.nav_host_fragment)
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+//        val appBarConfiguration = AppBarConfiguration(setOf(
+//                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
+        val appBarConfiguration = AppBarConfiguration(setOf(
+            R.id.eventFragment, R.id.infoFragment,
+            R.id.newsListFragment, R.id.mapsFragment))
+
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        findNavController(R.id.nav_host_fragment).popBackStack()
+        return true
+    }
+
+    //It is called when the app is created or resumed from another app
+    override fun onResume() {
+        super.onResume()
+        //The SwitchPreferenceCompat will automatically store the preference value in a key-value dictionary.
+        if (getSharedPreferences("${packageName}_preferences",
+                0).getBoolean("dark_mode", false)) {
+            //switch to night mode
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            //switch to day mode
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+    }
+
+
+
+}
