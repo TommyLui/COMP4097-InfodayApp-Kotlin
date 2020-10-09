@@ -2,16 +2,13 @@ package edu.hkbu.comp.comp4097.infoday
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import edu.hkbu.comp.comp4097.infoday.ui.events.EventFragment
-import edu.hkbu.comp.comp4097.infoday.ui.news.NewsRecyclerViewAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,6 +28,8 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        var testingGit = 0
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
