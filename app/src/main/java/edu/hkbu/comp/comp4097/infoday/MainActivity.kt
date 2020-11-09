@@ -1,5 +1,6 @@
 package edu.hkbu.comp.comp4097.infoday
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import edu.hkbu.comp.comp4097.infoday.data.Code
+import edu.hkbu.comp.comp4097.infoday.ui.login.LoginActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,14 +43,16 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         //The SwitchPreferenceCompat will automatically store the preference value in a key-value dictionary.
-        if (getSharedPreferences("${packageName}_preferences",
-                0).getBoolean("dark_mode", false)) {
+        if (getSharedPreferences("${packageName}_preferences", 0).getBoolean("dark_mode", false)) {
             //switch to night mode
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
             //switch to day mode
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
+
+        if (FirebaseAuth.getInstance().currentUser == null)
+            startActivityForResult(Intent(this, LoginActivity::class.java), Code.LOGIN_RESULT)
     }
 
 

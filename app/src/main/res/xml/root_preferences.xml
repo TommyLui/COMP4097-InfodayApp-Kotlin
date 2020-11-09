@@ -2,6 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:layout="@layout/layout_important_numbers">
     <PreferenceCategory app:layout="@layout/layout_info" />
+
     <PreferenceCategory
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -9,6 +10,7 @@
         <!-- Create a generic Preference that contains a layout-->
         <Preference app:layout="@layout/layout_important_numbers" />
     </PreferenceCategory>
+
     <PreferenceCategory app:title="Setting">
         <SwitchPreferenceCompat
             app:key="dark_mode"
