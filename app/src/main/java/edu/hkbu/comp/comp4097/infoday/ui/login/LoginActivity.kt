@@ -1,6 +1,7 @@
 package edu.hkbu.comp.comp4097.infoday.ui.login
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -15,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import edu.hkbu.comp.comp4097.infoday.R
+import edu.hkbu.comp.comp4097.infoday.SignupActivity
+import edu.hkbu.comp.comp4097.infoday.data.Code.SIGNUP_RESULT
 
 class LoginActivity : AppCompatActivity() {
 
@@ -53,6 +56,11 @@ class LoginActivity : AppCompatActivity() {
             loading.visibility = View.GONE
             if (loginResult.error != null) {
                 showLoginFailed(loginResult.error)
+                // adding these 4 lines
+                val signupIntent = Intent(this, SignupActivity::class.java)
+                signupIntent.putExtra("email", "${username.text}")
+                signupIntent.putExtra("password", "${password.text}")
+                startActivityForResult(signupIntent, SIGNUP_RESULT)
             }
             if (loginResult.success != null) {
                 updateUiWithUser(loginResult.success)
